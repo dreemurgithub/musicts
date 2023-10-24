@@ -36,3 +36,5 @@ app.listen(3000, () => {
 // route: user, music, auth, room
 // database contain: user, music, refresh session in cookie + access token
 // tech: websocket for chat, save music file for user streaming
+// https://www.npmjs.com/package/fluent-ffmpeg
+// 
