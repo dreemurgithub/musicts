@@ -30,3 +30,9 @@ app.get("/", async(req: Request, res: Response) => {
 app.listen(3000, () => {
   console.log("Server started on port 3000");
 });
+// https://hub.docker.com/repository/docker/dat93docker/musicbackend/general
+// make a docker image for postgres + nodejs
+// make env for production
+// route: user, music, auth, room
+// database contain: user, music, refresh session in cookie + access token
+// tech: websocket for chat, save music file for user streaming
