@@ -3,6 +3,7 @@ import express, { Request, Response, Application } from "express";
 import fs from "fs";
 import axios from "axios";
 import path from "path";
+import cors from "cors";
 const userKien = "3bf4954acamsh48f32682bcd1385p11173ajsn349424d2e603";
 const options = {
   method: "GET",
@@ -13,8 +14,15 @@ const options = {
     "X-RapidAPI-Host": "youtube-mp36.p.rapidapi.com",
   },
 };
-
 const app: Application = express();
+// app.use(cors({ origin: "*" }));
+app.use(
+  cors({
+    origin: ["*"],
+    allowedHeaders: ["*"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
+);
 
 app.get("/", async (req: Request, res: Response) => {
   try {
@@ -29,8 +37,7 @@ app.get("/", async (req: Request, res: Response) => {
 });
 
 app.get("/a", async (req: Request, res: Response) => {
-  const ffmpeg = require("fluent-ffmpeg");
-  const command = ffmpeg("./data/12 - Look On Down From The Bridge.mp3");
+  
 });
 
 app.get("/stream", (req, res) => {
