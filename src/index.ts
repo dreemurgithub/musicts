@@ -22,10 +22,11 @@ app.use(
     allowedHeaders: ["*"],
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
-);
-import dotenv from "dotenv";
-dotenv.config();
-import { Pool } from "pg";
+  );
+  import dotenv from "dotenv";
+  dotenv.config();
+  import { Pool } from "pg";
+  const isLocalhost = process.env.ENVIROMENT === "DEV"
 
 const pool = new Pool({
   port: process.env.POSTGRES_PORT && parseInt(process.env.POSTGRES_PORT)? parseInt(process.env.POSTGRES_PORT) : 5432, // Postgres server port[s]
@@ -38,7 +39,7 @@ const pool = new Pool({
   database: process.env.POSTGRES_DB, // Name of database to connect to
   user: process.env.POSTGRES_USER, // Username of database user
   password: process.env.POSTGRES_PASSWORD, // Password of database user
-  host: process.env.POSTGRES_LOCAL, // for docker-compose up db, to just run the database
+  host: isLocalhost ? process.env.POSTGRES_LOCAL : process.env.POSTGRES_HOST, // for docker-compose up db, to just run the database
   // host:  process.env.POSTGRES_HOST, // this is for docker-compose up
 
 });
@@ -95,6 +96,7 @@ app.listen(3000, async () => {
   }
 
   client.release();
+  console.log('hello compile')
 });
 // https://hub.docker.com/repository/docker/dat93docker/musicbackend/general
 // make a docker image for postgres + nodejs
