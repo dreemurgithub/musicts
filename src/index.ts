@@ -31,11 +31,6 @@ app.listen(3000, async () => {
   console.log("hello compile2");
   startSession();
 });
-// https://hub.docker.com/repository/docker/dat93docker/musicbackend/general
-// make a docker image for postgres + nodejs
-// make env for production
-// route: user, music, auth, room
-// database contain: user, music, refresh session in cookie + access token
-// tech: websocket for chat, save music file for user streaming
-// https://www.npmjs.com/package/fluent-ffmpeg
-// https://www.youtube.com/watch?v=UxxajLWwzqY => UxxajLWwzqY
+// get all id by checking the the data folder, if id post is not in => Fail/download?
+// middleware check session, allow post auth + post user
+// user table + music playlist with user id and music id + music infor that contain the youtube id + other id => 3 table + session === 4
