@@ -27,6 +27,13 @@ app.get("/", async(req: Request, res: Response) => {
   
 });
 
+app.get("/a", async(req: Request, res: Response) => {
+  const ffmpeg = require('fluent-ffmpeg');
+  const command = ffmpeg('./data/12 - Look On Down From The Bridge.mp3');
+
+  
+});
+
 app.listen(3000, () => {
   console.log("Server started on port 3000");
 });
