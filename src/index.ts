@@ -23,6 +23,28 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
+import dotenv from "dotenv";
+dotenv.config();
+import { Pool } from "pg";
+
+const pool = new Pool({
+  port: process.env.POSTGRES_PORT && parseInt(process.env.POSTGRES_PORT)? parseInt(process.env.POSTGRES_PORT) : 5432, // Postgres server port[s]
+  // database: `${process.env.POSTGRES_DB}`, // Name of database to connect to
+  // user: `${process.env.POSTGRES_USER}`, // Username of database user
+  // password: `${process.env.POSTGRES_PASSWORD}`, // Password of database user
+  // host: `${process.env.POSTGRES_LOCAL}`, // for docker-compose up db, to just run the database
+  // host:  process.env.POSTGRES_HOST, // this is for docker-compose up
+
+  database: process.env.POSTGRES_DB, // Name of database to connect to
+  user: process.env.POSTGRES_USER, // Username of database user
+  password: process.env.POSTGRES_PASSWORD, // Password of database user
+  host: process.env.POSTGRES_LOCAL, // for docker-compose up db, to just run the database
+  // host:  process.env.POSTGRES_HOST, // this is for docker-compose up
+
+});
+
+console.log('pool',pool);
+
 
 app.get("/", async (req: Request, res: Response) => {
   try {
@@ -36,9 +58,7 @@ app.get("/", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/a", async (req: Request, res: Response) => {
-  
-});
+app.get("/a", async (req: Request, res: Response) => {});
 
 app.get("/stream", (req, res) => {
   const file = path.join(
@@ -49,13 +69,32 @@ app.get("/stream", (req, res) => {
     if (err) {
       return res.send(err);
     }
-    console.log(buffer.length); // prints the size of the file in bytes
     res.send(buffer);
   });
 });
 
-app.listen(3000, () => {
-  console.log("Server started on port 3000");
+app.listen(3000, async () => {
+  const client = await pool.connect();
+
+  // users_session exists?
+  const querySession = `SELECT EXISTS (
+        SELECT 1
+        FROM pg_tables
+        WHERE tablename = 'user_sessions'
+        );`;
+
+  const sessionExist = await pool.query(querySession);
+
+  if (!sessionExist.rows[0].exists) {
+    const createSessionTable = `CREATE TABLE user_sessions (sid varchar NOT NULL COLLATE "default",
+          sess json NOT NULL, expire timestamp(6) NOT NULL );`;
+    const addConstrant = `ALTER TABLE user_sessions ADD CONSTRAINT user_sessions_sid_unique UNIQUE (sid);`;
+    //  error: there is no unique or exclusion constraint matching the ON CONFLICT specification => addCONSTRAINT fix this
+    await pool.query(createSessionTable);
+    await pool.query(addConstrant);
+  }
+
+  client.release();
 });
 // https://hub.docker.com/repository/docker/dat93docker/musicbackend/general
 // make a docker image for postgres + nodejs
