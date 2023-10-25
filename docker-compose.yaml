@@ -20,6 +20,8 @@ services:
     image: node
     container_name: node_on_postgres_con
     restart: unless-stopped
+    volumes:
+      - ./dist/data:/app/dist/data
     ports:
       - 3000:3000
     depends_on:
