@@ -97,6 +97,10 @@
 ### Download new MP3 to server - put request to '/listen'
  - send {id: string} , if the id is on youtube, the request should return status 200 and the song information, otherwise send a 400 with a message
 
+### Download 3 file, return only current playing - post request to '/listen'
+ - send {current: string, next: string, before: string} , if the current is on youtube, the request should return status 200 and the song information, otherwise send a 400 with a message
+ - The server will return the current song first and save the infor on disk later
+
 ### Stream music at '/listen/:id' , with id is from youtube video
 
 - Connect audio to get request in /listen/:id should allow listening to mp3.

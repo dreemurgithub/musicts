@@ -19,7 +19,4 @@ app.listen(port, async () => {
   console.log(`port ${port} is listening`);
   startSession();
 });
-// get all id by checking the the data folder, if id post is not in => Fail/download?
-// middleware check session, allow post auth + post user
-// user table + music playlist with user id and music id + music infor that contain the youtube id + other id => 3 table + session === 4
-// will make 2 function call to get stream + infor
+// listen to music from playlist will accept {current: string, other: [string,string]}

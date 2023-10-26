@@ -44,6 +44,24 @@ const downloadMusic = async (id: string) => {
     };
 };
 
+const downloadMusicQueue = async (id: string) => {
+  const infor = await serVerFetch(id);
+  if (infor.success && infor.link) {
+    const response = await axios.get(infor.link, {
+      responseType: "arraybuffer",
+    });
+    fs.mkdirSync(`${dataFolder}/${id}`);
+    const fileBuffer = new Uint8Array(response.data);
+    fs.writeFile(
+      `${dataFolder}/${id}/${infor.title}.mp3`,
+      fileBuffer,
+      (err) => {
+        if (err) console.log(err);
+      }
+    );
+  }
+};
+
 const musicInforFromId = (id: string) => {
   try {
     const tags = NodeID3.read(idToMusic(id));
@@ -54,4 +72,4 @@ const musicInforFromId = (id: string) => {
   }
 };
 
-export { serVerFetch, frontEndMusic, downloadMusic, musicInforFromId };
+export { serVerFetch, frontEndMusic, downloadMusic, musicInforFromId,downloadMusicQueue };
