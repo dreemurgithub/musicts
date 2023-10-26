@@ -2,6 +2,7 @@ import axios from "axios";
 import { options, dataFolder, idToMusic } from "../../config/constants";
 import fs from "fs";
 import path from "path";
+import NodeID3 from "node-id3";
 
 const serVerFetch = async (id: string) => {
   try {
@@ -43,4 +44,14 @@ const downloadMusic = async (id: string) => {
     };
 };
 
-export { serVerFetch, frontEndMusic, downloadMusic };
+const musicInforFromId = (id: string) => {
+  try {
+    const tags = NodeID3.read(idToMusic(id));
+    const { title, duration, artist } = tags as any;
+    return { success: true, data: { title, duration, artist, id } };
+  } catch {
+    return { success: false, message: { message: "No song to read" } };
+  }
+};
+
+export { serVerFetch, frontEndMusic, downloadMusic, musicInforFromId };

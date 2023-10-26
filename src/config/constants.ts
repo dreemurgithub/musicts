@@ -1,12 +1,20 @@
 "use strict";
 import fs from "fs";
 import path from "path";
+import { musicInforFromId } from "../model/helper/fetchHelper";
 const URLRoute = {
   userInfor: "/user",
   auth: "/auth",
   musicStream: "/listen",
   musicInfor: "/music",
 };
+
+const allMusicId = () => {
+  const file = path.join(__dirname, `../data/`);
+  const fileList = fs.readdirSync(file);
+  return fileList;
+};
+
 const idToMusic = (id: String) => {
   const file = path.join(
     __dirname,
@@ -16,6 +24,17 @@ const idToMusic = (id: String) => {
   const fileList = fs.readdirSync(file);
   return path.join(file, fileList[0]);
 };
+
+const allMusicName = () => {
+  const musicHash: any = {};
+  const allMusicIdArr = allMusicId();
+  const allName = allMusicIdArr.map((el) => musicInforFromId(el));
+  allName.forEach((result) => {
+    if (result.success && result.data) musicHash[result.data.id] = result.data;
+  });
+  return musicHash;
+};
+
 const userKien = "3bf4954acamsh48f32682bcd1385p11173ajsn349424d2e603";
 
 const options = (id: string) => {
@@ -30,6 +49,6 @@ const options = (id: string) => {
   };
 };
 
-const dataFolder = path.join(__dirname,'../../dist/data')
+const dataFolder = path.join(__dirname, "../../dist/data");
 
-export { URLRoute, idToMusic, options ,dataFolder};
+export { URLRoute, idToMusic, options, dataFolder, allMusicId, allMusicName };
