@@ -2,6 +2,10 @@ import express, { Request, Response, Application } from "express";
 import cors from "cors";
 
 const configApp: Application = express();
+configApp.use((req: Request, res: Response ,next)=>{
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next()
+})
 configApp.use(
     cors({
       origin: ["*"],
@@ -9,4 +13,6 @@ configApp.use(
       methods: ["GET", "POST", "PUT", "DELETE"],
     })
     );
+
+
 export default configApp

@@ -17,7 +17,8 @@ listenRoute.get(
 listenRoute.post(
   `${URLRoute.musicStream}/:id`,
   async (req: Request, res: Response) => {
-    res.send(downloadMusic(req.params.id));
+    const newInfor = await downloadMusic(req.params.id)
+    res.send(newInfor);
   }
 );
 

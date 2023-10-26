@@ -5,8 +5,8 @@ import { serVerFetch } from "./model/helper/fetchHelper";
 import configApp from "./config";
 import controller from "./controller";
 const app: Application = express();
-app.use(controller)
 app.use(configApp);
+app.use(controller)
 
 app.get("/", async (req: Request, res: Response) => {
   const link = await serVerFetch("UxxajLWwzqY");
