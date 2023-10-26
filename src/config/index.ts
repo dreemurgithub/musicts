@@ -13,6 +13,7 @@ configApp.use(
       methods: ["GET", "POST", "PUT", "DELETE"],
     })
     );
+configApp.use(express.json())
 
 
 export default configApp

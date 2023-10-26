@@ -1,7 +1,7 @@
 import express, { Request, Response, Application } from "express";
 import middleWare from "./middleware";
-import listenRoute from "./listen";
-import musicRoute from "./music";
+import listenRoute from "./streamMusic";
+import musicRoute from "./inforMusic";
 import authRoute from "./auth";
 
 const controller: Application = express();

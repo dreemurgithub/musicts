@@ -13,9 +13,10 @@ app.get("/", async (req: Request, res: Response) => {
   res.send(link);
 });
 
+const port = process.env.port || 3000
 
-app.listen(3000, async () => {
-  console.log("hello compile2");
+app.listen(port, async () => {
+  console.log(`port ${port} is listening`);
   startSession();
 });
 // get all id by checking the the data folder, if id post is not in => Fail/download?
