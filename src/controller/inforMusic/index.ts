@@ -9,7 +9,8 @@ import { musicInforFromId } from "../../model/helper/fetchHelper";
 import { musicSearch } from "../../model/Music";
 const musicRoute: Application = express();
 
-musicRoute.get( // one music infor
+musicRoute.get(
+  // one music infor
   `${URLRoute.musicInfor}/:id`,
   async (req: Request, res: Response) => {
     const result = musicInforFromId(req.params.id);
@@ -18,7 +19,8 @@ musicRoute.get( // one music infor
   }
 );
 
-musicRoute.get( // all music on server
+musicRoute.get(
+  // all music on server
   `${URLRoute.musicInfor}`,
   async (req: Request, res: Response) => {
     const result = allMusicName();
@@ -26,17 +28,14 @@ musicRoute.get( // all music on server
   }
 );
 
-musicRoute.get( // search youtube
+musicRoute.get(
+  // search youtube
   `/search${URLRoute.musicInfor}/:search`,
   async (req: Request, res: Response) => {
-    try {
-      const { search } = req.params;
-      const result = await musicSearch(search);
-      res.status(200).send(result);
-    } catch (err){
-      console.log(err)
-      res.status(200).send([]);
-    }
+    const { search } = req.params;
+    const result = await musicSearch(search);
+    if (result.success) return res.status(200).send(result.data);
+    else return res.status(400).send(result.message);
   }
 );
 
