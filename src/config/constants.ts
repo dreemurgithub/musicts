@@ -10,7 +10,7 @@ const URLRoute = {
 };
 
 const allMusicId = () => {
-  const file = path.join(__dirname, `../data/`);
+  const file = path.join(__dirname, `../../data`);
   const fileList = fs.readdirSync(file);
   return fileList;
 };

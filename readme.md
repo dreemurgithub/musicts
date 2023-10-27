@@ -12,9 +12,8 @@
 
 ### Access backend
 
-- Fetch to URL 192.168.1.123:3000
-- Current stream: '/stream'
-
+ - Fetch to URL 192.168.1.123:3000
+ - 
 ## General infors
 
 ### Routes
@@ -31,29 +30,11 @@
 - Success getting data: {success: true, data: ... }, statusCode 200
 - Success update data: {success: true, message: string }, statusCode 201
 
-## '/music'Route, for music infor, search
+## '/search/music' for searching music from youtube
 
-### All avaiable music at: get '/music'
+### '/search/music/:search/my+love'
 
-- always return an ojbect with key as id
-- { ...,abcd : {
-  title: string,
-  artist: string,
-  id: "abcd"
-  },...}
-
-### One music at: get '/music/:id'
-
-- Correct id: {id: "\_k3y2tVWK74"} => {
-  "title": "[Vietsub] Luyến Nhân Tâm - 恋人心 - Hoa Thiên Cốt",
-  "artist": "Huyền Vũ",
-  "id": "\_k3y2tVWK74"
-  }
-- Wrong id return a 400 with message
-
-### Search example for: post '/music'
-
-- This is a search request to youtube, the return below is for {search: "my love" }
+- This is a search request to youtube, the return below is for search: "my love" 
 - [...{
   "id": {
   "videoId": "ulOb9gIGGd0"
@@ -88,6 +69,28 @@
   "views": "340454225"
   },...]
  - Bad request and no infor search will return []
+
+
+
+## '/music'Route, for music infor
+
+### All avaiable music at: get '/music'
+
+- always return an ojbect with key as id
+- { ...,abcd : {
+  title: string,
+  artist: string,
+  id: "abcd"
+  },...}
+
+### One music at: get '/music/:id'
+
+- Correct id: {id: "\_k3y2tVWK74"} => {
+  "title": "[Vietsub] Luyến Nhân Tâm - 恋人心 - Hoa Thiên Cốt",
+  "artist": "Huyền Vũ",
+  "id": "\_k3y2tVWK74"
+  }
+- Wrong id return a 400 with message
 
 ## '/listen' route, for stream, download
 
