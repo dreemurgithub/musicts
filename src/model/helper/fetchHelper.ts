@@ -15,7 +15,12 @@ const serVerFetch = async (id: string) => {
     };
   } catch (error) {
     console.log(error);
-    return { success: false };
+    return {
+      success: false,
+      link: '',
+      title: '',
+      duration: '1:00',
+    };
   }
 };
 const frontEndMusic = async (id: string) => {
@@ -41,6 +46,7 @@ const downloadMusic = async (id: string) => {
     return {
       success: false,
       message: "No video",
+      data: ''
     };
 };
 
@@ -72,4 +78,10 @@ const musicInforFromId = (id: string) => {
   }
 };
 
-export { serVerFetch, frontEndMusic, downloadMusic, musicInforFromId,downloadMusicQueue };
+export {
+  serVerFetch,
+  frontEndMusic,
+  downloadMusic,
+  musicInforFromId,
+  downloadMusicQueue,
+};
