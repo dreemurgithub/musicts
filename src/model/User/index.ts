@@ -1,10 +1,10 @@
-import { regexUserName, regexPassword } from "../../config/constants";
+import { regexUserName, regexPassword } from "@/config/constants";
 import {
   addUserQuery,
   checkSignin,
   checkUsername,
   editUserQuery,
-} from "../helper/query";
+} from "@/model/helper/query";
 import { errorUserCheck } from "./userRegexHelper";
 
 const makeUser = async ({

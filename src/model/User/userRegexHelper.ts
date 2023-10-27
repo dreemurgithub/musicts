@@ -1,5 +1,5 @@
-import { regexUserName, regexPassword } from "../../config/constants";
-import { checkUsername } from "../helper/query";
+import { regexUserName, regexPassword } from "@/config/constants";
+import { checkUsername } from "@/model/helper/query";
 
 export const errorUserCheck = async ({
   name,

@@ -1,6 +1,6 @@
 import express, { Request, Response, Application } from "express";
-import { URLRoute, idToMusic } from "../../config/constants";
-import { signIn } from "../../model/User";
+import { URLRoute, idToMusic } from "@/config/constants";
+import { signIn } from "@/model/User";
 const authRoute: Application = express();
 
 authRoute.post(URLRoute.auth, async (req: Request, res: Response) => {

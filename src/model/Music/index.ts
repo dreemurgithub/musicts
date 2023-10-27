@@ -3,8 +3,8 @@ import {
   downloadMusic,
   musicInforFromId,
   downloadMusicQueue,
-} from "../helper/fetchHelper";
-import { allMusicId, regex5minLess } from "../../config/constants";
+} from "@/model/helper/fetchHelper";
+import { allMusicId, regex5minLess } from "@/config/constants";
 /**
  * Given a search query, searching on youtube
  * @param {string} search value (string or videoId).

@@ -1,5 +1,5 @@
 import { emit } from "process";
-import { pool } from "../../config/postgres";
+import { pool } from "@/config/postgres";
 
 const addUserQuery = async ({
   name,

@@ -28,9 +28,9 @@ const startSession = async () => {
   if (!usersExist.rows[0].exists) {
     const createUserTable = `CREATE TABLE users (
       id SERIAL PRIMARY KEY,
-      username VARCHAR(50) NOT NULL,
-      name VARCHAR(50) NOT NULL,
-      password VARCHAR(50) NOT NULL
+      username VARCHAR(32) NOT NULL,
+      name VARCHAR(32) NOT NULL,
+      password VARCHAR(32) NOT NULL
     );
     `;
     await pool.query(createUserTable);

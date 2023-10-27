@@ -1,8 +1,8 @@
 import express, { Request, Response, Application } from "express";
-import { URLRoute, idToMusic, allMusicId } from "../../config/constants";
+import { URLRoute, idToMusic, allMusicId } from "@/config/constants";
 import fs from "fs";
-import { downloadMusic } from "../../model/helper/fetchHelper";
-import { downloadMusicCheck, downloadMusicCheckQueue } from "../../model/Music";
+import { downloadMusic } from "@/model/helper/fetchHelper";
+import { downloadMusicCheck, downloadMusicCheckQueue } from "@/model/Music";
 
 const listenRoute: Application = express();
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { options, dataFolder, idToMusic } from "../../config/constants";
+import { options, dataFolder, idToMusic } from "@/config/constants";
 import fs from "fs";
 import path from "path";
 import NodeID3 from "node-id3";

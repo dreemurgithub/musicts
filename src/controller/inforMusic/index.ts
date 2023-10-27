@@ -4,9 +4,9 @@ import {
   idToMusic,
   allMusicId,
   allMusicName,
-} from "../../config/constants";
-import { musicInforFromId } from "../../model/helper/fetchHelper";
-import { musicSearch } from "../../model/Music";
+} from "@/config/constants";
+import { musicInforFromId } from "@/model/helper/fetchHelper";
+import { musicSearch } from "@/model/Music";
 const musicRoute: Application = express();
 
 musicRoute.get(

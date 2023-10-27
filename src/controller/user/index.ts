@@ -1,7 +1,7 @@
 import express, { Request, Response, Application } from "express";
-import { URLRoute, idToMusic } from "../../config/constants";
-import { musicInforFromId } from "../../model/helper/fetchHelper";
-import { makeUser,editUser } from "../../model/User";
+import { URLRoute, idToMusic } from "@/config/constants";
+import { musicInforFromId } from "@/model/helper/fetchHelper";
+import { makeUser,editUser } from "@/model/User";
 interface CustomRequest extends Request {
   session: any; // Replace `any` with the appropriate type for your session data
 }
