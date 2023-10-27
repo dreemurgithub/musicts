@@ -26,11 +26,11 @@ musicRoute.get( // all music on server
   }
 );
 
-musicRoute.post( // search youtube
-  `${URLRoute.musicInfor}`,
+musicRoute.get( // search youtube
+  `/search${URLRoute.musicInfor}/:search`,
   async (req: Request, res: Response) => {
     try {
-      const { search } = req.body;
+      const { search } = req.params;
       const result = await musicSearch(search);
       res.status(200).send(result);
     } catch (err){
