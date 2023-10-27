@@ -18,6 +18,24 @@ const startSession = async () => {
   console.log("session table");
   const client = await pool.connect();
 
+  // user exists?
+  const queryUser = `SELECT EXISTS (
+    SELECT 1
+    FROM pg_tables
+    WHERE tablename = 'users'
+    );`;
+  const usersExist = await pool.query(queryUser);
+  if (!usersExist.rows[0].exists) {
+    const createUserTable = `CREATE TABLE users (
+      id SERIAL PRIMARY KEY,
+      username VARCHAR(50) NOT NULL,
+      email VARCHAR(100) NOT NULL,
+      password VARCHAR(50) NOT NULL
+    );
+    `;
+    await pool.query(createUserTable);
+  }
+
   // users_session exists?
   const querySession = `SELECT EXISTS (
         SELECT 1
