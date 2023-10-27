@@ -50,5 +50,6 @@ const options = (id: string) => {
 };
 
 const dataFolder = path.join(__dirname, "../../dist/data");
+const regex5minLess = /^(1:([0-5][0-9])|(2|3|4):[0-5][0-9])$/
 
-export { URLRoute, idToMusic, options, dataFolder, allMusicId, allMusicName };
+export { URLRoute, idToMusic, options, dataFolder, allMusicId, allMusicName ,regex5minLess};

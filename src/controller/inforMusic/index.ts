@@ -30,7 +30,6 @@ musicRoute.post( // search youtube
   `${URLRoute.musicInfor}`,
   async (req: Request, res: Response) => {
     try {
-      console.log('req.body',req.body)
       const { search } = req.body;
       const result = await musicSearch(search);
       res.status(200).send(result);
