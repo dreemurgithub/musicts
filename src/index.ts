@@ -8,11 +8,6 @@ const app: Application = express();
 app.use(configApp);
 app.use(controller)
 
-app.get("/", async (req: Request, res: Response) => {
-  const link = await serVerFetch("UxxajLWwzqY");
-  res.send(link);
-});
-
 const port = process.env.port || 3000
 
 app.listen(port, async () => {

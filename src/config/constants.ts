@@ -18,7 +18,7 @@ const allMusicId = () => {
 const idToMusic = (id: String) => {
   const file = path.join(
     __dirname,
-    `../data/${id}`
+    `../../data/${id}`
     // "./data/12 - Look On Down From The Bridge.mp3",
   );
   const fileList = fs.readdirSync(file);
@@ -49,7 +49,7 @@ const options = (id: string) => {
   };
 };
 
-const dataFolder = path.join(__dirname, "../../dist/data");
+const dataFolder = path.join(__dirname, "../dist/data");
 const regex5minLess = /^(1:([0-5][0-9])|(2|3|4):[0-5][0-9])$/
 
 export { URLRoute, idToMusic, options, dataFolder, allMusicId, allMusicName ,regex5minLess};

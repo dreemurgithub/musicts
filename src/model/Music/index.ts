@@ -28,13 +28,16 @@ const downloadMusicCheck = async (id: string) => {
     return {
       success: false,
       message: "Duration must be less than 5 minutes",
+      data: ''
     };
-  const allId = allMusicId();
-  if (!allId.includes(id)) return downloadMusic(id);
-  return musicInforFromId(id);
+  else {
+    const allId = allMusicId();
+    if (!allId.includes(id)) return downloadMusic(id);
+    return musicInforFromId(id);
+  }
 };
 
-const downloadMusicCheckQueue = async(id: string) => {
+const downloadMusicCheckQueue = async (id: string) => {
   const check = await checkDuration(id);
   const allId = allMusicId();
   if (!allId.includes(id) && check) return downloadMusicQueue(id);
