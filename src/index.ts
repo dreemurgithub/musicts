@@ -26,7 +26,7 @@ app.listen(port, async () => {
   //   playlistName: "2",
   //   youtubeId: "Zasx9hjo4WY",
   // });
-  console.log(songsinPlaylist({playlistName: '1', userId: 2}))
+  // console.log(songsinPlaylist({playlistName: '1', userId: 2}))
   
 });
 // listen to music from playlist will accept {current: string, other: [string,string]}

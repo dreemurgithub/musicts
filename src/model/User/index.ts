@@ -2,7 +2,6 @@ import { regexUserName, regexPassword } from "../../config/constants";
 import {
   addUserQuery,
   checkSignin,
-  checkEmail,
   checkUsername,
   editUserQuery,
 } from "../helper/query";
@@ -34,27 +33,26 @@ const makeUser = async ({
 };
 
 const signIn = async ({
-  email,
+  username,
   password,
 }: {
-  email: string;
+  username: string;
   password: string;
 }) => {
-  const result = await checkSignin({ email, password });
+  const result = await checkSignin({ username, password });
   if (result.rowCount)
     return {
       success: true,
       data: {
-        email,
+        username,
         password,
-        username: result.rows[0].username,
         id: result.rows[0].id,
       },
       message: "",
     };
   return {
     success: false,
-    message: "Wrong email or password",
+    message: "Wrong username or password",
     data: null,
   };
 };
