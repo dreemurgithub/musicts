@@ -37,15 +37,15 @@ const checkUsername = async (username: string) => {
 };
 
 const checkSignin = async ({
-  email,
+  username,
   password,
 }: {
-  email: string;
+  username: string;
   password: string;
 }) => {
   const query = {
-    text: "INSERT SELECT * FROM users WHERE email = $1 AND password = $2 (email, password) VALUES ($1, $2)",
-    values: [email, password],
+    text: "SELECT * FROM users WHERE username = $1 AND password = $2",
+    values: [username, password],
   };
   const result = await pool.query(query.text, query.values);
   return result;
@@ -70,4 +70,4 @@ const editUserQuery = async ({
   return result;
 };
 
-export { addUserQuery, checkSignin, checkEmail, checkUsername, editUserQuery };
+export { addUserQuery, checkSignin,  checkUsername, editUserQuery };
