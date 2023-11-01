@@ -18,8 +18,8 @@ userRoute.post(`${URLRoute.userInfor}`,async (req: Request, res: Response) => { 
 
 userRoute.put(`${URLRoute.userInfor}`,async (req: Request, res: Response) => { // make new user
   const newReq = req as CustomRequest
-  const id = newReq.session.id
-  const {username, name, password} = req.body
+  // const id = newReq.session.id
+  const {username, name, password,id} = req.body
   const result = await editUser({name,password,username,id});
   if (result.success) return res.status(201).send(result.data);
   else return res.status(400).send(result.message);

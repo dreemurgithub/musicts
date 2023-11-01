@@ -1,4 +1,3 @@
-import { emit } from "process";
 import { pool } from "@/config/postgres";
 
 const addUserQuery = async ({
@@ -16,15 +15,6 @@ const addUserQuery = async ({
   };
   const result = await pool.query(query.text, query.values);
   return result;
-};
-
-const checkEmail = async (email: string) => {
-  const query = {
-    text: "SELECT * FROM users WHERE email = $1",
-    values: [email],
-  };
-  const result = await pool.query(query.text, query.values);
-  return result.rowCount;
 };
 
 const checkUsername = async (username: string) => {
@@ -63,7 +53,7 @@ const editUserQuery = async ({
   id: number;
 }) => {
   const query = {
-    text: "UPDATE your_table_name SET name = $1, password = $2, username = $3 WHERE id = $4",
+    text: "UPDATE users SET name = $1, password = $2 WHERE id = $4 and username = $3",
     values: [name, password, username, id],
   };
   const result = await pool.query(query.text, query.values);

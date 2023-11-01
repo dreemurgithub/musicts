@@ -30,9 +30,9 @@ const startSession = async () => {
       id SERIAL PRIMARY KEY,
       username VARCHAR(32) NOT NULL,
       name VARCHAR(32) NOT NULL,
-      password VARCHAR(32) NOT NULL
+      password VARCHAR(64) NOT NULL
     );
-    `;
+    `; // 64 is the size of hash string
     await pool.query(createUserTable);
   }
 

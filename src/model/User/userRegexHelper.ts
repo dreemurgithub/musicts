@@ -5,10 +5,12 @@ export const errorUserCheck = async ({
   name,
   password,
   username,
+  id,
 }: {
   name: string;
   password: string;
   username: string;
+  id? : number;
 }) => {
   if (!name || !username || !password)
     return {
@@ -27,7 +29,7 @@ export const errorUserCheck = async ({
         "Password contain atleast 5 characters, a number, a lowercase and uppercase",
     };
   const checkUserName = await checkUsername(username);
-  if (checkUserName)
+  if (checkUserName && !id)
     return {
       success: false,
       message: "This username is already taken",
