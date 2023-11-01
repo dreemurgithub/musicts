@@ -1,13 +1,12 @@
-import { regexUserName, regexPassword } from "../../config/constants";
+import { regexUserName, regexPassword } from "@/config/constants";
 import {
   addUserQuery,
   checkSignin,
-  checkEmail,
   checkUsername,
   editUserQuery,
-} from "../helper/query";
+} from "@/model/helper/query";
 import { errorUserCheck } from "./userRegexHelper";
-
+import { hashPassword } from "./hash";
 const makeUser = async ({
   password,
   username,
@@ -19,11 +18,12 @@ const makeUser = async ({
 }) => {
   const checkError = await errorUserCheck({ name, password, username });
   if (!checkError.success) return checkError;
-  const result = await addUserQuery({ name, password, username });
+  const passwordSecure = hashPassword(password)
+  const result = await addUserQuery({ name, password: passwordSecure, username });
   if (result.rowCount)
     return {
       success: true,
-      data: { name, password, username },
+      data: { name, username },
       message: "",
     };
   return {
@@ -34,27 +34,26 @@ const makeUser = async ({
 };
 
 const signIn = async ({
-  email,
+  username,
   password,
 }: {
-  email: string;
+  username: string;
   password: string;
 }) => {
-  const result = await checkSignin({ email, password });
+  const passwordSecure = hashPassword(password)
+  const result = await checkSignin({ username, password: passwordSecure });
   if (result.rowCount)
     return {
       success: true,
       data: {
-        email,
-        password,
-        username: result.rows[0].username,
-        id: result.rows[0].id,
+        username,
+        id: Number(result.rows[0].id),
       },
       message: "",
     };
   return {
     success: false,
-    message: "Wrong email or password",
+    message: "Wrong username or password",
     data: null,
   };
 };
@@ -70,16 +69,17 @@ const editUser = async ({
   id: number;
   name: string;
 }) => {
-  const checkError = await errorUserCheck({ name, password, username });
+  const checkError = await errorUserCheck({ name, password, username,id });
   if (!checkError.success) return checkError;
 
-  const result = await editUserQuery({ name, password, id, username });
+  const passwordSecure = hashPassword(password)
+
+  const result = await editUserQuery({ name, password : passwordSecure, id, username });
   if (result.rowCount)
     return {
       success: true,
       data: {
         name,
-        password,
         username,
         id
       },

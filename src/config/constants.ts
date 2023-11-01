@@ -1,7 +1,7 @@
 "use strict";
 import fs from "fs";
 import path from "path";
-import { musicInforFromId } from "../model/helper/fetchHelper";
+import { musicInforFromId } from "@/model/helper/fetchHelper";
 const URLRoute = {
   userInfor: "/user",
   auth: "/auth",

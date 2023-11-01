@@ -28,11 +28,11 @@ const startSession = async () => {
   if (!usersExist.rows[0].exists) {
     const createUserTable = `CREATE TABLE users (
       id SERIAL PRIMARY KEY,
-      username VARCHAR(50) NOT NULL,
-      email VARCHAR(100) NOT NULL,
-      password VARCHAR(50) NOT NULL
+      username VARCHAR(32) NOT NULL,
+      name VARCHAR(32) NOT NULL,
+      password VARCHAR(64) NOT NULL
     );
-    `;
+    `; // 64 is the size of hash string
     await pool.query(createUserTable);
   }
 
