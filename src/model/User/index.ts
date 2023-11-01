@@ -46,7 +46,7 @@ const signIn = async ({
       data: {
         username,
         password,
-        id: result.rows[0].id,
+        id: Number(result.rows[0].id),
       },
       message: "",
     };
